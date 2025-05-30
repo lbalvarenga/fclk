@@ -52,6 +52,11 @@
 			path = fclkUITests;
 			sourceTree = "<group>";
 		};
+		274AF4BD2DEA3B5F00952D1F /* docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = docs;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +87,7 @@
 		2744BAD22DE953C9001B9EB4 = {
 			isa = PBXGroup;
 			children = (
+				274AF4BD2DEA3B5F00952D1F /* docs */,
 				274AF4BB2DEA3AEC00952D1F /* LICENSE.md */,
 				274AF4B82DEA3A4E00952D1F /* README.md */,
 				2744BADD2DE953C9001B9EB4 /* fclk */,
@@ -118,6 +124,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				2744BADD2DE953C9001B9EB4 /* fclk */,
+				274AF4BD2DEA3B5F00952D1F /* docs */,
 			);
 			name = fclk;
 			packageProductDependencies = (
