@@ -21,7 +21,17 @@ struct BaseClockView: View {
             VStack(spacing: 5) {
                 // Tooltip (on hover)
                 if settingsStore.settings.tooltipPosition == .top {
-                    TooltipView(isHovering: $isHovering)
+                    TooltipView(isHoveringClock: $isHovering)
+                        .transition(
+                            .asymmetric(
+                                insertion: .move(edge: .bottom).combined(
+                                    with: .opacity
+                                ),
+                                removal: .move(edge: .bottom).combined(
+                                    with: .opacity
+                                )
+                            )
+                        )
                 }
 
                 ZStack {
@@ -44,9 +54,23 @@ struct BaseClockView: View {
                 .cornerRadius(15)
 
                 if settingsStore.settings.tooltipPosition == .bottom {
-                    TooltipView(isHovering: $isHovering)
+                    TooltipView(isHoveringClock: $isHovering)
+                        .transition(
+                            .asymmetric(
+                                insertion: .move(edge: .top).combined(
+                                    with: .opacity
+                                ),
+                                removal: .move(edge: .top).combined(
+                                    with: .opacity
+                                )
+                            )
+                        )
                 }
             }
+            .animation(
+                .spring(response: 0.3, dampingFraction: 0.7),
+                value: isHovering
+            )
             .onHover(perform: { isHovering in
                 self.isHovering = isHovering
             })

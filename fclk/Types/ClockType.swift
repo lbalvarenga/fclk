@@ -6,6 +6,6 @@
 //
 
 enum ClockType: String, CaseIterable, Identifiable, Codable {
-    case digital, analog, pomodoro
+    case digital, analog, pomo
     var id: Self { self }
 }

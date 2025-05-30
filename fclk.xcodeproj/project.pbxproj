@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		274AF4BA2DEA3A5200952D1F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 274AF4B82DEA3A4E00952D1F /* README.md */; };
+		274AF4BC2DEA3AEE00952D1F /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 274AF4BB2DEA3AEC00952D1F /* LICENSE.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2744BAEA2DE953CA001B9EB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +32,8 @@
 		2744BADB2DE953C9001B9EB4 /* Floating Clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Floating Clock.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2744BAE92DE953CA001B9EB4 /* fclkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fclkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2744BAF32DE953CA001B9EB4 /* fclkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fclkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		274AF4B82DEA3A4E00952D1F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		274AF4BB2DEA3AEC00952D1F /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +82,8 @@
 		2744BAD22DE953C9001B9EB4 = {
 			isa = PBXGroup;
 			children = (
+				274AF4BB2DEA3AEC00952D1F /* LICENSE.md */,
+				274AF4B82DEA3A4E00952D1F /* README.md */,
 				2744BADD2DE953C9001B9EB4 /* fclk */,
 				2744BAEC2DE953CA001B9EB4 /* fclkTests */,
 				2744BAF62DE953CA001B9EB4 /* fclkUITests */,
@@ -212,6 +221,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274AF4BA2DEA3A5200952D1F /* README.md in Resources */,
+				274AF4BC2DEA3AEE00952D1F /* LICENSE.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
