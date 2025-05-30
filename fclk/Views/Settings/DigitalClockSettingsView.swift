@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DigitalClockSettingsView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
 
     var body: some View {
         VStack {
@@ -28,6 +28,5 @@ struct DigitalClockSettingsView: View {
 #if DEBUG
     #Preview {
         SettingsView()
-            .environmentObject(SettingsStore())
     }
 #endif

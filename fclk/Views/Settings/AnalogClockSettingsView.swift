@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnalogClockSettingsView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
 
     var body: some View {
         VStack {
@@ -25,6 +25,5 @@ struct AnalogClockSettingsView: View {
 #if DEBUG
     #Preview {
         SettingsView()
-            .environmentObject(SettingsStore())
     }
 #endif

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BaseClockView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
     @State private var isHovering: Bool = false
 
     private let timer = Timer.publish(every: 1, on: .main, in: .common)
@@ -74,13 +74,15 @@ struct BaseClockView: View {
             .onHover(perform: { isHovering in
                 self.isHovering = isHovering
             })
+            .background(
+                WindowAspectRatioController()
+            )
         }
     }
 }
 
 #if DEBUG
-    #Preview {
-        BaseClockView()
-            .environmentObject(SettingsStore())
-    }
+//    #Preview {
+//        BaseClockView(settingsStore: SettingsStore())
+//    }
 #endif

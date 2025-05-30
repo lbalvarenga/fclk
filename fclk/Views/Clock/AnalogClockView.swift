@@ -41,7 +41,7 @@ struct ClockHand: View {
 }
 
 struct AnalogClockView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
 
     let currentTime: Date
 
@@ -139,8 +139,8 @@ struct AnalogClockView: View {
 }
 
 #if DEBUG
-    #Preview {
-        BaseClockView()
-            .environmentObject(SettingsStore())
-    }
+//    #Preview {
+//        let settingsStore = SettingsStore.shared
+//        BaseClockView(settingsStore: settingsStore)
+//    }
 #endif

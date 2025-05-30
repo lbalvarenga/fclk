@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
 
     var body: some View {
         TabView {
@@ -54,6 +54,5 @@ struct SettingsView: View {
 #if DEBUG
     #Preview {
         SettingsView()
-            .environmentObject(SettingsStore())
     }
 #endif

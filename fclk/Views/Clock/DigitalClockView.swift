@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DigitalClockView: View {
-    @EnvironmentObject private var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
     let currentTime: Date
 
     private var timeFormatter: DateFormatter {
@@ -22,6 +22,7 @@ struct DigitalClockView: View {
             formatter.dateFormat =
                 settingsStore.settings.DCShowSeconds ? "hh:mm:ss" : "h:mm"
         }
+        
         return formatter
     }
 
@@ -56,7 +57,6 @@ struct DigitalClockView: View {
 
 #if DEBUG
     #Preview {
-        BaseClockView()
-            .environmentObject(SettingsStore())
+        BaseClockView(settingsStore: SettingsStore())
     }
 #endif

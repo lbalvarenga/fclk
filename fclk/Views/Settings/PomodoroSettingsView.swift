@@ -18,6 +18,5 @@ struct PomodoroSettingsView: View {
 #if DEBUG
     #Preview {
         SettingsView()
-            .environmentObject(SettingsStore())
     }
 #endif

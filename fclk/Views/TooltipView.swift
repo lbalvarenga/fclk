@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TooltipView: View {
-    @EnvironmentObject var settingsStore: SettingsStore
+    @ObservedObject var settingsStore = SettingsStore.shared
     let isHoveringClock: Binding<Bool>
 
     @State private var isHoveringTooltip: Bool

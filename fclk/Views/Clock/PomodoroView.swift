@@ -23,7 +23,6 @@ struct PomodoroView: View {
 
 #if DEBUG
     #Preview {
-        BaseClockView()
-            .environmentObject(SettingsStore())
+        BaseClockView(settingsStore: SettingsStore())
     }
 #endif

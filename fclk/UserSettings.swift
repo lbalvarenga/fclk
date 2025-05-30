@@ -5,18 +5,28 @@
 //  Created by Lucas Alvarenga on 30/05/25.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 struct UserSettings: Codable {
     var clockType: ClockType
     var alwaysOnTop: Bool
     var tooltipPosition: TooltipPosition
-    
+    var resizePercentage: CGFloat
+
     // Digital Clock
     var DCUse24HourClock: Bool
     var DCShowSeconds: Bool
-    
+    var DCFormatString: String {
+        if DCUse24HourClock {
+            return DCShowSeconds ? "HH:mm:ss" : "HH:mm"
+        } else {
+            return DCShowSeconds ? "hh:mm:ss a" : "hh:mm a"
+        }
+    }
+    var DCFont: String
+    var DCFontPadding: CGSize
+
     // Analog Clock
     var ACSmoothHands: Bool
     var ACShowSecondsHand: Bool
@@ -26,8 +36,11 @@ struct UserSettings: Codable {
             clockType: .digital,
             alwaysOnTop: true,
             tooltipPosition: .top,
+            resizePercentage: 0.1,
             DCUse24HourClock: false,
             DCShowSeconds: false,
+            DCFont: "Helvetica Neue",
+            DCFontPadding: CGSize(width: 10, height: 10),
             ACSmoothHands: true,
             ACShowSecondsHand: true
         )
@@ -83,6 +96,7 @@ class SettingsManager {
 }
 
 class SettingsStore: ObservableObject {
+    static let shared = SettingsStore()
     @Published var settings: UserSettings
 
     private var cancellable: AnyCancellable?
@@ -95,7 +109,7 @@ class SettingsStore: ObservableObject {
             .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
             .sink { newSettings in
                 SettingsManager.shared.save(settings: newSettings)
-                print("Settings saved: \(newSettings)")
+                //                print("Settings saved: \(newSettings)")
             }
     }
 }
