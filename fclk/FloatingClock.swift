@@ -44,6 +44,22 @@ struct FloatingClock: App {
                             )
                     }
                 }
+
+                Picker(
+                    "Tooltip Position",
+                    selection: $settingsStore.settings.tooltipPosition
+                ) {
+                    ForEach(
+                        Array(TooltipPosition.allCases.enumerated()),
+                        id: \.element.rawValue
+                    ) { i, type in
+                        Text(type.rawValue.capitalized).tag(type)
+                            .keyboardShortcut(
+                                KeyEquivalent(Character("\(i + 1)")),
+                                modifiers: [.shift, .option]
+                            )
+                    }
+                }
             }
 
             CommandGroup(replacing: .toolbar) {
