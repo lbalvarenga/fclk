@@ -67,6 +67,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidBecomeActive(_ notification: Notification) {
         // When the app becomes active (e.g., clicking Dock icon),
         // ensure the window comes to the front.
-        self.window?.makeKeyAndOrderFront(nil)
+        self.window?.orderFront(nil)
     }
 }

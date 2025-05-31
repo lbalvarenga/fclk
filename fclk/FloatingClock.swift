@@ -56,7 +56,7 @@ struct FloatingClock: App {
                         Text(type.rawValue.capitalized).tag(type)
                             .keyboardShortcut(
                                 KeyEquivalent(Character("\(i + 1)")),
-                                modifiers: [.shift, .option]
+                                modifiers: [.option]
                             )
                     }
                 }
@@ -136,8 +136,8 @@ struct FloatingClock: App {
     }
 }
 
-#if DEBUG
-    #Preview {
-        BaseClockView(settingsStore: SettingsStore())
-    }
-#endif
+//#if DEBUG
+//    #Preview {
+//        BaseClockView(settingsStore: SettingsStore())
+//    }
+//#endif

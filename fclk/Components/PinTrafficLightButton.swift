@@ -1,5 +1,5 @@
 //
-//  RedTrafficLightButton.swift
+//  PinTrafficLightButton.swift
 //  fclk
 //
 //  Created by Lucas Alvarenga on 30/05/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RedTrafficLightButton: View {
+struct PinTrafficLightButton: View {
     var engaged: Bool = false
     var action: () -> Void
 
@@ -15,12 +15,12 @@ struct RedTrafficLightButton: View {
         CircularButtonView(
             engaged: engaged,
             action: action,
-            baseColor: .red,
-            engagedColor: .red,
+            baseColor: .blue,
+            engagedColor: .cyan,
             defaultColor: Color.gray.opacity(0.5),
-            iconName: "xmark",
+            iconName: "pin",
             iconHoverColor: Color.black.opacity(0.6),
-            iconDefaultColor: Color.clear  // Original behavior: icon only appears on hover
+            iconDefaultColor: Color.clear
         )
     }
 }

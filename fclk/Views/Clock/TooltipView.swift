@@ -19,7 +19,9 @@ struct TooltipView: View {
     }
 
     var body: some View {
-        if isHoveringClock.wrappedValue {
+        if isHoveringClock.wrappedValue
+            && settingsStore.settings.tooltipPosition != .hidden
+        {
             HStack {
                 HStack {
                     RedTrafficLightButton(engaged: isHoveringTooltip) {
@@ -56,6 +58,10 @@ struct TooltipView: View {
                         }
                     }
                     .labelsHidden()
+                    
+//                    PinTrafficLightButton(engaged: isHoveringTooltip) {
+//                        print("pin")
+//                    }
                 }
                 .pickerStyle(.segmented)
                 .padding(10)

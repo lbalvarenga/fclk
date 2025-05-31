@@ -45,6 +45,20 @@ struct AnalogClockView: View {
 
     let currentTime: Date
 
+    // Animation 59s->0 CC wraparound fix
+    @State private var revolutions: Int = 0
+    @State private var secondsAngle: Angle
+
+    init(currentTime: Date) {
+        self.currentTime = currentTime
+
+        // Initialize secondsAngle based on the current time
+        let second = Double(
+            Calendar.current.component(.second, from: currentTime)
+        )
+        self.secondsAngle = .degrees((second / 60.0 * 360.0))
+    }
+
     var body: some View {
         GeometryReader { geometry in
             let date = currentTime
@@ -62,7 +76,7 @@ struct AnalogClockView: View {
                     width: size * 0.025,
                     color: .primary
                 )
-                .rotationEffect(hourAngle(for: date))
+                .rotationEffect(calcHourAngle(for: date))
                 .shadow(radius: 3)
 
                 ClockHand(
@@ -70,7 +84,7 @@ struct AnalogClockView: View {
                     width: size * 0.018,
                     color: .primary
                 )
-                .rotationEffect(minuteAngle(for: date))
+                .rotationEffect(calcMinuteAngle(for: date))
                 .shadow(radius: 3)
 
                 if settingsStore.settings.ACShowSecondsHand {
@@ -79,8 +93,13 @@ struct AnalogClockView: View {
                         width: size * 0.007,
                         color: .red
                     )
-                    .rotationEffect(secondAngle(for: date, smooth: settingsStore.settings.ACSmoothHands))
+                    .rotationEffect(secondsAngle)
                     .shadow(radius: 3)
+                    .animation(
+                        settingsStore.settings.ACSmoothHands
+                            ? .linear(duration: 1) : nil,
+                        value: secondsAngle
+                    )
                 }
 
                 ZStack {
@@ -103,11 +122,21 @@ struct AnalogClockView: View {
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
+            .onChange(of: currentTime) { prev, curr in
+                if Calendar.current.component(.second, from: prev)
+                    > Calendar.current.component(.second, from: curr)
+                {
+                    revolutions += 1
+                }
+
+                secondsAngle = calcSecondAngle(for: date)
+            }
+
         }
         .aspectRatio(1, contentMode: .fit)
     }
 
-    private func hourAngle(for date: Date) -> Angle {
+    private func calcHourAngle(for date: Date) -> Angle {
         let calendar = Calendar.current
         let hour = Double(calendar.component(.hour, from: date) % 12)
         let minute = Double(calendar.component(.minute, from: date))
@@ -115,7 +144,7 @@ struct AnalogClockView: View {
         return .degrees(totalHours / 12 * 360)
     }
 
-    private func minuteAngle(for date: Date) -> Angle {
+    private func calcMinuteAngle(for date: Date) -> Angle {
         let calendar = Calendar.current
         let minute = Double(calendar.component(.minute, from: date))
         let second = Double(calendar.component(.second, from: date))
@@ -123,24 +152,16 @@ struct AnalogClockView: View {
         return .degrees(totalMinutes / 60 * 360)
     }
 
-    private func secondAngle(for date: Date, smooth: Bool) -> Angle {
-        let calendar = Calendar.current
-        let second = Double(calendar.component(.second, from: date))
-
-        if smooth {
-            let nanosecond = Double(calendar.component(.nanosecond, from: date))
-            let totalSeconds = second + (nanosecond / 1_000_000_000)
-            return .degrees(totalSeconds / 60 * 360 - 90)  // -90 to align 0/60 at the top
-        } else {
-            // For ticking, only use the whole second
-            return .degrees(second / 60 * 360 - 90)  // -90 to align 0/60 at the top
-        }
+    private func calcSecondAngle(for date: Date) -> Angle {
+        let second = Double(Calendar.current.component(.second, from: date))
+        return .degrees(((second + 1) / 60.0 * 360.0))
+            + .degrees(Double(revolutions) * 360.0)
     }
 }
 
 #if DEBUG
-//    #Preview {
-//        let settingsStore = SettingsStore.shared
-//        BaseClockView(settingsStore: settingsStore)
-//    }
+    //    #Preview {
+    //        let settingsStore = SettingsStore.shared
+    //        BaseClockView(settingsStore: settingsStore)
+    //    }
 #endif

@@ -55,8 +55,8 @@ struct DigitalClockView: View {
     }
 }
 
-#if DEBUG
-    #Preview {
-        BaseClockView(settingsStore: SettingsStore())
-    }
-#endif
+//#if DEBUG
+//    #Preview {
+//        BaseClockView(settingsStore: SettingsStore())
+//    }
+//#endif
