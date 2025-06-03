@@ -75,7 +75,10 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath "${{ env.ARCHIVE_PATH }}" \
             -exportPath "${{ env.EXPORT_PATH }}" \
-            -exportOptionsPlist "${{ env.EXPORT_OPTIONS_PLIST_PATH }}"
+            -exportOptionsPlist "${{ env.EXPORT_OPTIONS_PLIST_PATH }}" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
 
       - name: List exported files
         run: |
