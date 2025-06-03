@@ -42,7 +42,7 @@ jobs:
               <key>method</key>
               <string>debugging</string>
               <key>signingStyle</key>
-              <string>manual</string>
+              <string>automatic</string>
               <key>teamID</key>
               <string>4HTW7KT2Z5</string>
               <key>stripSwiftSymbols</key>
